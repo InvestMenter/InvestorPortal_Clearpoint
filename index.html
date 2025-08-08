@@ -747,7 +747,7 @@
         let investorData = {};
         let uploadedDocuments = {}; // Store uploaded documents in memory
 
-        // Enhanced data structure with unit breakdown and proof of payments
+        // Updated data structure with correct payment received amounts from the installment plan
         const defaultInvestorData = {
             jens_rabe: { 
                 name: "Jens Rabe", 
@@ -757,20 +757,20 @@
                 otherFees: 0,
                 investmentShare: "5%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:404366,receivedAmount:404366,pendingAmount:0,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:167486,receivedAmount:167486,pendingAmount:0,type:"1st Installment",status:"completed"},
+                    {date:"20 Sep 2023",installmentAmount:404366,receivedAmount:401966,pendingAmount:2400,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:167486,receivedAmount:167485,pendingAmount:1,type:"1st Installment",status:"completed"},
                     {date:"18 May 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"2nd Installment",status:"completed"},
                     {date:"18 Aug 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:74038,receivedAmount:74038,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:148077,receivedAmount:148077,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:74038,receivedAmount:74039,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:148077,receivedAmount:31626,pendingAmount:116451,type:"5th Installment",status:"pending"},
                     {date:"10 Jun 2026",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"20% Construction",status:"pending"},
                     {date:"11 Nov 2026",installmentAmount:74038,receivedAmount:0,pendingAmount:74038,type:"40% Construction",status:"pending"},
                     {date:"13 Feb 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"60% Construction",status:"pending"},
                     {date:"31 Jul 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"80% Construction",status:"pending"}
                 ], 
                 paymentDetails: [
-                    {description:"Received Value",amount:148077,status:"completed"},
-                    {description:"Pending Payment",amount:518269,status:"pending"}
+                    {description:"Total Received",amount:842602,status:"completed"},
+                    {description:"Pending Payment",amount:715805,status:"pending"}
                 ],
                 unitBreakdown: [
                     {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 5, investment: 77944},
@@ -810,12 +810,12 @@
                 otherFees: 0,
                 investmentShare: "22.50%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819651,pendingAmount:0,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753688,pendingAmount:0,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333172,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:666348,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819649,pendingAmount:2,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:780911,pendingAmount:0,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:449894,pendingAmount:0,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:275770,pendingAmount:101072,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333174,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:667145,pendingAmount:0,type:"5th Installment",status:"completed"},
                     {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
                     {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
                     {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
@@ -823,8 +823,8 @@
                     {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
                 ], 
                 paymentDetails: [
-                    {description:"Received Value",amount:666348,status:"completed"},
-                    {description:"Pending Payment",amount:2998564,status:"pending"}
+                    {description:"Total Received",amount:4326543,status:"completed"},
+                    {description:"Pending Payment",amount:2332564,status:"pending"}
                 ],
                 unitBreakdown: [
                     {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
@@ -869,19 +869,19 @@
                 otherFees: 0,
                 investmentShare: "5%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:404366,receivedAmount:404366,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"20 Sep 2023",installmentAmount:404366,receivedAmount:401966,pendingAmount:2400,type:"Initial Investment",status:"completed"},
                     {date:"18 Nov 2023",installmentAmount:167486,receivedAmount:167486,pendingAmount:0,type:"1st Installment",status:"completed"},
                     {date:"18 May 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"2nd Installment",status:"completed"},
                     {date:"18 Aug 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:74038,receivedAmount:74038,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:148077,receivedAmount:148077,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:74038,receivedAmount:74039,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:148077,receivedAmount:150476,pendingAmount:0,type:"5th Installment",status:"completed"},
                     {date:"10 Jun 2026",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"20% Construction",status:"pending"},
                     {date:"11 Nov 2026",installmentAmount:74038,receivedAmount:0,pendingAmount:74038,type:"40% Construction",status:"pending"},
                     {date:"13 Feb 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"60% Construction",status:"pending"},
                     {date:"31 Jul 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"80% Construction",status:"pending"}
                 ], 
                 paymentDetails: [
-                    {description:"Received Value",amount:148077,status:"completed"},
+                    {description:"Total Received",amount:961453,status:"completed"},
                     {description:"Pending Payment",amount:518269,status:"pending"}
                 ],
                 unitBreakdown: [
@@ -921,11 +921,11 @@
                 otherFees: 0,
                 investmentShare: "22.50%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819651,pendingAmount:0,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753688,pendingAmount:0,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333172,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819649,pendingAmount:2,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753687,pendingAmount:1,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376843,pendingAmount:0,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376814,pendingAmount:28,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333174,pendingAmount:0,type:"4th Installment",status:"completed"},
                     {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:666348,pendingAmount:0,type:"5th Installment",status:"completed"},
                     {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
                     {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
@@ -934,8 +934,8 @@
                     {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
                 ], 
                 paymentDetails: [
-                    {description:"Received Value",amount:666348,status:"completed"},
-                    {description:"Pending Payment",amount:2998564,status:"pending"}
+                    {description:"Total Received",amount:4326515,status:"completed"},
+                    {description:"Pending Payment",amount:2998216,status:"pending"}
                 ],
                 unitBreakdown: [
                     {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
@@ -969,17 +969,17 @@
             gergely_kulcsar: { 
                 name: "Dr. Gergely Kulcsar", 
                 totalInvestment: 7536872, 
-                completedPayments: 5, 
-                pendingPayments: 6, 
+                completedPayments: 6, 
+                pendingPayments: 5, 
                 otherFees: 0,
                 investmentShare: "22.50%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819651,pendingAmount:0,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753688,pendingAmount:0,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333172,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"5th Installment",status:"pending"},
+                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1822557,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:749584,pendingAmount:4104,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376028,pendingAmount:814,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376814,pendingAmount:28,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333144,pendingAmount:28,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:668416,pendingAmount:0,type:"5th Installment",status:"completed"},
                     {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
                     {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
                     {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
@@ -987,8 +987,8 @@
                     {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
                 ], 
                 paymentDetails: [
-                    {description:"Received Value",amount:333172,status:"completed"},
-                    {description:"Pending Payment",amount:3664220,status:"pending"}
+                    {description:"Total Received",amount:4326543,status:"completed"},
+                    {description:"Pending Payment",amount:2998564,status:"pending"}
                 ],
                 unitBreakdown: [
                     {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
@@ -1027,12 +1027,12 @@
                 otherFees: 0,
                 investmentShare: "22.50%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819651,pendingAmount:0,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753688,pendingAmount:0,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333172,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:666348,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1956849,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753637,pendingAmount:51,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376814,pendingAmount:28,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376814,pendingAmount:28,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:348853,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:513616,pendingAmount:152732,type:"5th Installment",status:"completed"},
                     {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
                     {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
                     {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
@@ -1040,8 +1040,8 @@
                     {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
                 ], 
                 paymentDetails: [
-                    {description:"Received Value",amount:666348,status:"completed"},
-                    {description:"Pending Payment",amount:2998564,status:"pending"}
+                    {description:"Total Received",amount:4326583,status:"completed"},
+                    {description:"Pending Payment",amount:2330564,status:"pending"}
                 ],
                 unitBreakdown: [
                     {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
@@ -1077,23 +1077,13 @@
 
         // Load and save data functions
         function loadData() {
-            const savedData = localStorage.getItem('investorData');
-            const savedUploads = localStorage.getItem('uploadedDocuments');
-            
-            if (savedData) {
-                investorData = JSON.parse(savedData);
-            } else {
-                investorData = defaultInvestorData;
-            }
-            
-            if (savedUploads) {
-                uploadedDocuments = JSON.parse(savedUploads);
-            }
+            // For this version, we'll use the default data directly
+            investorData = defaultInvestorData;
         }
 
         function saveData() {
-            localStorage.setItem('investorData', JSON.stringify(investorData));
-            localStorage.setItem('uploadedDocuments', JSON.stringify(uploadedDocuments));
+            // Store data in a global variable for this session only
+            // Note: This won't persist between page reloads as we're not using localStorage
         }
 
         // Tab switching function
@@ -1438,12 +1428,21 @@
         
         function updatePaymentDetails(investorKey) { 
             const data = investorData[investorKey]; 
+            let totalReceived = 0;
             let totalPending = 0; 
             let completedCount = 0; 
-            data.paymentHistory.forEach(p => p.status === 'completed' ? completedCount++ : totalPending += p.pendingAmount); 
-            const lastCompletedPayment = data.paymentHistory.slice().reverse().find(p => p.status === 'completed' && p.type !== 'Initial Investment'); 
-            const receivedValue = lastCompletedPayment ? lastCompletedPayment.receivedAmount : 0; 
-            data.paymentDetails = [{description: "Received Value", amount: receivedValue, status: "completed"}, {description: "Pending Payment", amount: totalPending, status: "pending"}]; 
+            data.paymentHistory.forEach(p => {
+                if (p.status === 'completed') {
+                    completedCount++;
+                }
+                totalReceived += p.receivedAmount;
+                totalPending += p.pendingAmount;
+            }); 
+            
+            data.paymentDetails = [
+                {description: "Total Received", amount: totalReceived, status: "completed"}, 
+                {description: "Pending Payment", amount: totalPending, status: "pending"}
+            ]; 
             data.completedPayments = completedCount; 
             data.pendingPayments = data.paymentHistory.length - completedCount; 
         }
