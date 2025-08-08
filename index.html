@@ -294,6 +294,20 @@
             color: #000201;
         }
 
+        .positive-balance {
+            color: #107c10;
+            font-weight: bold;
+        }
+
+        .negative-balance {
+            color: #a4262c;
+            font-weight: bold;
+        }
+
+        .zero-balance {
+            color: #000201;
+        }
+
         .download-btn {
             background: #CBA735;
             color: #000201;
@@ -652,11 +666,12 @@
                         <table class="payment-table">
                             <thead>
                                 <tr>
-                                    <th>Date</th>
-                                    <th>Installment Amount</th>
-                                    <th>Received Amount</th>
-                                    <th>Pending Amount</th>
-                                    <th>Type</th>
+                                    <th>Description</th>
+                                    <th>Due Date</th>
+                                    <th>Amount</th>
+                                    <th>Payment Date</th>
+                                    <th>Amount Paid</th>
+                                    <th>Balance</th>
                                     <th>Status</th>
                                     <th class="actions-col">Actions</th>
                                 </tr>
@@ -752,46 +767,49 @@
             jens_rabe: { 
                 name: "Jens Rabe", 
                 totalInvestment: 1558407, 
-                completedPayments: 6, 
-                pendingPayments: 4, 
-                otherFees: 0,
+                completedPayments: 5, 
+                pendingPayments: 6, 
+                otherFees: 69394,
                 investmentShare: "5%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:404366,receivedAmount:401966,pendingAmount:2400,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:167486,receivedAmount:167485,pendingAmount:1,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:74038,receivedAmount:74039,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:148077,receivedAmount:31626,pendingAmount:116451,type:"5th Installment",status:"pending"},
-                    {date:"10 Jun 2026",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"20% Construction",status:"pending"},
-                    {date:"11 Nov 2026",installmentAmount:74038,receivedAmount:0,pendingAmount:74038,type:"40% Construction",status:"pending"},
-                    {date:"13 Feb 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"60% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"80% Construction",status:"pending"}
+                    {description:"Initial Investment (20%)",dueDate:"20 Sep 2023",installmentAmount:334972,paymentDates:["19 Sep 2023"],receivedAmounts:[334972],totalReceived:334972,amountDue:0,status:"completed"},
+        {description:"Other Fees",dueDate:"20 Sep 2023",installmentAmount:69394,paymentDates:["19 Sep 2023"],receivedAmounts:[66994],totalReceived:66994,amountDue:-2400,status:"completed"},
+        {description:"2nd Installment (10%)",dueDate:"18 Nov 2023",installmentAmount:167486,paymentDates:["20 Nov 2023","23 Nov 2023","23 Nov 2023"],receivedAmounts:[52378,50000,65107],totalReceived:167485,amountDue:-1,status:"completed"},
+        {description:"3rd Installment (5%)",dueDate:"18 May 2024",installmentAmount:83743,paymentDates:["2 Jul 2024"],receivedAmounts:[83743],totalReceived:83743,amountDue:0,status:"completed"},
+        {description:"4th Installment (5%)",dueDate:"18 Aug 2024",installmentAmount:83743,paymentDates:["9 Aug 2024"],receivedAmounts:[83743],totalReceived:83743,amountDue:0,status:"completed"},
+        {description:"5th Installment (5%)",dueDate:"18 Nov 2024",installmentAmount:74038,paymentDates:["9 Dec 2024"],receivedAmounts:[74039],totalReceived:74039,amountDue:1,status:"completed"},
+        {description:"20% Construction (10%)",dueDate:"14 Jul 2025",installmentAmount:148077,paymentDates:["4 Jul 2025","5 Aug 2025"],receivedAmounts:[0,31626],totalReceived:31626,amountDue:-116451,status:"overdue"},
+        {description:"40% Construction (10%)",dueDate:"7 Jan 2026",installmentAmount:148077,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"60% Construction (10%)",dueDate:"10 Jun 2026",installmentAmount:148077,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"80% Construction (5%)",dueDate:"11 Nov 2026",installmentAmount:74038,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"90% Construction (10%)",dueDate:"13 Feb 2027",installmentAmount:148077,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"100% Construction (10%)",dueDate:"31 Jul 2027",installmentAmount:148077,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"}
+
                 ], 
                 paymentDetails: [
                     {description:"Total Received",amount:842602,status:"completed"},
-                    {description:"Pending Payment",amount:715805,status:"pending"}
+                    {description:"Pending Payment",amount:537859,status:"pending"}
                 ],
                 unitBreakdown: [
-                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 5, investment: 31178},
-                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 5, investment: 81844},
-                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 5, investment: 81844},
-                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 5, investment: 116144},
-                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 5, investment: 116794},
-                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 5, investment: 116844},
-                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 5, investment: 46458},
-                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 5, investment: 116044},
-                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 5, investment: 116844},
-                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 5, investment: 112394},
-                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 5, investment: 158444},
-                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 5, investment: 151794}
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 5, investment: 77944.40},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 623555, percentage: 5, investment: 31177.75},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 5, investment: 77944.40},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 5, investment: 81844.40},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 5, investment: 77944.40},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 5, investment: 77944.40},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 5, investment: 81844.40},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 5, investment: 116144.40},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 5, investment: 116794.40},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 5, investment: 116844.40},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 929155, percentage: 5, investment: 46457.75},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 5, investment: 116044.40},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 5, investment: 116844.40},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 5, investment: 112394.40},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 5, investment: 158444.40},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 5, investment: 151794.40}
                 ],
                 proofOfPayments: [
-                    {date: "19 Sep 2023", amount: "334,972 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/14-VmKLT0yGw46Efai5pU1EwnVyxj3nco/view?usp=drive_link"},
+                          {date: "19 Sep 2023", amount: "334,972 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/14-VmKLT0yGw46Efai5pU1EwnVyxj3nco/view?usp=drive_link"},
                     {date: "19 Sep 2023", amount: "66,994 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1wa6uVVrU-h2v9xvIceAZxvVXG7j-IRFP/view?usp=drive_link"},
                     {date: "20 Nov 2023", amount: "52,378 AED", type: "SWIFT from Investmenter", link: "https://drive.google.com/file/d/1PU_sTqroCFQfM1XYxFz56wXJv2XO2_DG/view?usp=drive_link"},
                     {date: "23 Nov 2023", amount: "50,000 AED", type: "SWIFT from Emirates NBD Rabe", link: "https://drive.google.com/file/d/1jlnYx8MjHwnwCBIQeQXKOGxFjEKENhGN/view?usp=sharing"},
@@ -804,48 +822,49 @@
             },
             michael_menter: { 
                 name: "Michael Menter", 
-                totalInvestment: 7536872, 
+                totalInvestment: 7012832, 
                 completedPayments: 6, 
                 pendingPayments: 5, 
-                otherFees: 0,
+                otherFees: 372275,
                 investmentShare: "22.50%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819649,pendingAmount:2,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:780911,pendingAmount:0,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:449894,pendingAmount:0,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:275770,pendingAmount:101072,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333174,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:667145,pendingAmount:0,type:"5th Installment",status:"completed"},
-                    {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
-                    {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
-                    {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"80% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
+                           {description:"Initial Investment (20%)",dueDate:"20 Sep 2023",installmentAmount:1507376,paymentDates:["23 Sep 2023","23 Sep 2023"],receivedAmounts:[483333,1024041],totalReceived:1507374,amountDue:-2,status:"completed"},
+         {description:"Other Fees",dueDate:"20 Sep 2023",installmentAmount:312275,paymentDates:["21 Sep 2023","22 Sep 2023"],receivedAmounts:[98275,214000],totalReceived:312275,amountDue:0,status:"completed"},
+        {description:"2nd Installment (10%)",dueDate:"18 Nov 2023",installmentAmount:753688,paymentDates:["6 Oct 2023","21 Nov 2023","21 Nov 2023","21 Nov 2023"],receivedAmounts:[29056,151855,100000,500000],totalReceived:780911,amountDue:27223,status:"completed"},
+        {description:"3rd Installment (5%)",dueDate:"18 May 2024",installmentAmount:376842,paymentDates:["15 May 2024","24 May 2024"],receivedAmounts:[376844,73050],totalReceived:449894,amountDue:73052,status:"completed"},
+        {description:"4th Installment (5%)",dueDate:"18 Aug 2024",installmentAmount:376842,paymentDates:["23 Aug 2024"],receivedAmounts:[275770],totalReceived:275770,amountDue:-101072,status:"completed"},
+        {description:"5th Installment (5%)",dueDate:"18 Nov 2024",installmentAmount:333172,paymentDates:["9 Dec 2024"],receivedAmounts:[333174],totalReceived:333174,amountDue:2,status:"completed"},
+        {description:"20% Construction (10%)",dueDate:"14 Jul 2025",installmentAmount:666348,paymentDates:["6 Aug 2025","5 Aug 2025"],receivedAmounts:[524828,142317],totalReceived:667145,amountDue:797,status:"completed"},
+        {description:"40% Construction (10%)",dueDate:"7 Jan 2026",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"60% Construction (10%)",dueDate:"10 Jun 2026",installmentAmount:333172,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"80% Construction (5%)",dueDate:"11 Nov 2026",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"90% Construction (10%)",dueDate:"13 Feb 2027",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"100% Construction (10%)",dueDate:"31 Jul 2027",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"}
                 ], 
                 paymentDetails: [
                     {description:"Total Received",amount:4326543,status:"completed"},
-                    {description:"Pending Payment",amount:2332564,status:"pending"}
+                    {description:"Pending Payment",amount:2332216,status:"pending"}
                 ],
                 unitBreakdown: [
-                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368300},
-                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368300},
-                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522650},
-                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525575},
-                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525800},
-                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 22.50, investment: 522650},
-                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522200},
-                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525800},
-                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505775},
-                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 713000},
-                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683075}
+                   {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 623555, percentage: 22.50, investment: 140299.88},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368299.8},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368299.8},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522649.8},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525574.8},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525799.8},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 929155, percentage: 22.50, investment: 209059.88},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522199.8},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525799.8},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505774.8},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 712999.8},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683074.8}
                 ],
                 proofOfPayments: [
-                    {date: "23 Sep 2023", amount: "483,333 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1VCxo9SMCe1qeoBZ5-hnGpkf_H9Ytp4xr/view?usp=drive_link"},
+                      {date: "23 Sep 2023", amount: "483,333 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1VCxo9SMCe1qeoBZ5-hnGpkf_H9Ytp4xr/view?usp=drive_link"},
                     {date: "23 Sep 2023", amount: "1,024,041 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1OC4HqkBfRry9RKTPMH3ZGmJUrlvvWCK0/view?usp=drive_link"},
                     {date: "21 Sep 2023", amount: "98,275 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1i4gXZareV8WSRb7n_TqCJYoc2RLPixOk/view?usp=drive_link"},
                     {date: "22 Sep 2023", amount: "214,000 AED", type: "Credit Card Payment", link: "https://drive.google.com/file/d/12W5FJFVjJ3LYwv6_1r1CpHjtgDxL-cQ7/view?usp=drive_link"},
@@ -863,44 +882,47 @@
             },
             alexander_neubauer: { 
                 name: "Dr. Alexander Neubauer", 
-                totalInvestment: 1674860, 
+                totalInvestment: 1558407, 
                 completedPayments: 6, 
-                pendingPayments: 4, 
-                otherFees: 0,
+                pendingPayments: 5, 
+                otherFees: 69394,
                 investmentShare: "5%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:404366,receivedAmount:401966,pendingAmount:2400,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:167486,receivedAmount:167486,pendingAmount:0,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:74038,receivedAmount:74039,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:148077,receivedAmount:150476,pendingAmount:0,type:"5th Installment",status:"completed"},
-                    {date:"10 Jun 2026",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"20% Construction",status:"pending"},
-                    {date:"11 Nov 2026",installmentAmount:74038,receivedAmount:0,pendingAmount:74038,type:"40% Construction",status:"pending"},
-                    {date:"13 Feb 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"60% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"80% Construction",status:"pending"}
+                    {description:"Initial Investment (20%)",dueDate:"20 Sep 2023",installmentAmount:334972,paymentDates:["19 Sep 2023"],receivedAmounts:[334972],totalReceived:334972,amountDue:0,status:"completed"},
+        {description:"Other Fees",dueDate:"20 Sep 2023",installmentAmount:69394,paymentDates:["19 Sep 2023"],receivedAmounts:[66994],totalReceived:66994,amountDue:-2400,status:"completed"},
+        {description:"2nd Installment (10%)",dueDate:"18 Nov 2023",installmentAmount:167486,paymentDates:["20 Nov 2023"],receivedAmounts:[167486],totalReceived:167486,amountDue:0,status:"completed"},
+        {description:"3rd Installment (5%)",dueDate:"18 May 2024",installmentAmount:83743,paymentDates:["13 May 2024"],receivedAmounts:[83743],totalReceived:83743,amountDue:0,status:"completed"},
+        {description:"4th Installment (5%)",dueDate:"18 Aug 2024",installmentAmount:83743,paymentDates:["23 Aug 2024"],receivedAmounts:[83743],totalReceived:83743,amountDue:0,status:"completed"},
+        {description:"5th Installment (5%)",dueDate:"18 Nov 2024",installmentAmount:74038,paymentDates:["9 Dec 2024"],receivedAmounts:[74039],totalReceived:74039,amountDue:1,status:"completed"},
+        {description:"20% Construction (10%)",dueDate:"14 Jul 2025",installmentAmount:148077,paymentDates:["1 Jul 2025","5 Aug 2025"],receivedAmounts:[118850,31626],totalReceived:150476,amountDue:2399,status:"completed"},
+        {description:"40% Construction (10%)",dueDate:"7 Jan 2026",installmentAmount:148077,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"60% Construction (10%)",dueDate:"10 Jun 2026",installmentAmount:148077,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"80% Construction (5%)",dueDate:"11 Nov 2026",installmentAmount:74038,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"90% Construction (10%)",dueDate:"13 Feb 2027",installmentAmount:148077,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"100% Construction (10%)",dueDate:"31 Jul 2027",installmentAmount:148077,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"}
+
                 ], 
                 paymentDetails: [
                     {description:"Total Received",amount:961453,status:"completed"},
-                    {description:"Pending Payment",amount:518269,status:"pending"}
+                    {description:"Pending Payment",amount:370192,status:"pending"}
                 ],
                 unitBreakdown: [
-                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 5, investment: 81844},
-                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 5, investment: 77944},
-                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 5, investment: 81844},
-                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 5, investment: 116144},
-                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 5, investment: 116794},
-                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 5, investment: 116844},
-                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 5, investment: 116144},
-                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 5, investment: 116044},
-                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 5, investment: 116844},
-                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 5, investment: 112394},
-                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 5, investment: 158444},
-                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 5, investment: 151794}
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 5, investment: 77944.40},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 623555, percentage: 5, investment: 31177.75},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 5, investment: 77944.40},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 5, investment: 81844.40},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 5, investment: 77944.40},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 5, investment: 77944.40},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 5, investment: 81844.40},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 5, investment: 116144.40},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 5, investment: 116794.40},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 5, investment: 116844.40},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 929155, percentage: 5, investment: 46457.75},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 5, investment: 116044.40},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 5, investment: 116844.40},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 5, investment: 112394.40},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 5, investment: 158444.40},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 5, investment: 151794.40}
                 ],
                 proofOfPayments: [
                     {date: "19 Sep 2023", amount: "334,972 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1QBKAwitQMPhhhyDbV-hLMsmvmlJ46Ooj/view?usp=drive_link"},
@@ -913,50 +935,52 @@
                     {date: "05 Aug 2025", amount: "31,626 AED", type: "Income from 704 and 710", link: "https://drive.google.com/file/d/12VlUNg5gy3VuRBy-mnLw6j_-S1ubrRCB/view?usp=drive_link"}
                 ]
             },
-            fuat_atar: { 
-                name: "Fuat Atar", 
-                totalInvestment: 7536872, 
+            fuat_akar: { 
+                name: "Fuat Akar", 
+                totalInvestment: 7012832, 
                 completedPayments: 6, 
                 pendingPayments: 5, 
-                otherFees: 0,
+                otherFees: 312275,
                 investmentShare: "22.50%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819649,pendingAmount:2,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753687,pendingAmount:1,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376843,pendingAmount:0,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376814,pendingAmount:28,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333174,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:666348,pendingAmount:0,type:"5th Installment",status:"completed"},
-                    {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
-                    {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
-                    {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"80% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
+                    {description:"Initial Investment (20%)",dueDate:"20 Sep 2023",installmentAmount:1507376,paymentDates:["20 Sep 2023"],receivedAmounts:[1507374],totalReceived:1507374,amountDue:-2,status:"completed"},
+        {description:"Other Fees",dueDate:"20 Sep 2023",installmentAmount:312275,paymentDates:["20 Sep 2023"],receivedAmounts:[312275],totalReceived:312275,amountDue:0,status:"completed"},
+        {description:"2nd Installment (10%)",dueDate:"18 Nov 2023",installmentAmount:753688,paymentDates:["20 Nov 2023"],receivedAmounts:[753687],totalReceived:753687,amountDue:-1,status:"completed"},
+        {description:"3rd Installment (5%)",dueDate:"18 May 2024",installmentAmount:376842,paymentDates:["13 May 2024"],receivedAmounts:[376843],totalReceived:376843,amountDue:1,status:"completed"},
+        {description:"4th Installment (5%)",dueDate:"18 Aug 2024",installmentAmount:376842,paymentDates:["11 Aug 2024"],receivedAmounts:[376844],totalReceived:376844,amountDue:2,status:"completed"},
+        {description:"5th Installment (5%)",dueDate:"18 Nov 2024",installmentAmount:333172,paymentDates:["9 Dec 2024"],receivedAmounts:[333174],totalReceived:333174,amountDue:2,status:"completed"},
+        {description:"20% Construction (10%)",dueDate:"14 Jul 2025",installmentAmount:666348,paymentDates:["4 Aug 2025","5 Aug 2025"],receivedAmounts:[524033,142317],totalReceived:666350,amountDue:2,status:"completed"},
+        {description:"40% Construction (10%)",dueDate:"7 Jan 2026",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"60% Construction (10%)",dueDate:"10 Jun 2026",installmentAmount:333172,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"80% Construction (5%)",dueDate:"11 Nov 2026",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"90% Construction (10%)",dueDate:"13 Feb 2027",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"100% Construction (10%)",dueDate:"31 Jul 2027",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"}
+
                 ], 
                 paymentDetails: [
-                    {description:"Total Received",amount:4326515,status:"completed"},
-                    {description:"Pending Payment",amount:2998216,status:"pending"}
+                    {description:"Total Received",amount:4326547,status:"completed"},
+                    {description:"Pending Payment",amount:2332216,status:"pending"}
                 ],
                 unitBreakdown: [
-                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368300},
-                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368300},
-                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522650},
-                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525575},
-                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525800},
-                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 22.50, investment: 522650},
-                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522200},
-                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525800},
-                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505775},
-                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 713000},
-                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683075}
+                  {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 623555, percentage: 22.50, investment: 140299.88},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368299.8},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368299.8},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522649.8},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525574.8},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525799.8},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 929155, percentage: 22.50, investment: 209059.88},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522199.8},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525799.8},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505774.8},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 712999.8},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683074.8}
                 ],
                 proofOfPayments: [
-                    {date: "20 Sep 2023", amount: "1,507,374 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1GLDsH8s1gxvcV9bmRz5PEKljxXJtsqPB/view?usp=drive_link"},
+                      {date: "20 Sep 2023", amount: "1,507,374 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1GLDsH8s1gxvcV9bmRz5PEKljxXJtsqPB/view?usp=drive_link"},
                     {date: "20 Sep 2023", amount: "312,275 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1PWecuaWHxm_XJW2yuWyCfYO-UWWzheLF/view?usp=drive_link"},
                     {date: "20 Nov 2023", amount: "753,687 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1c_F3CV6Hb6JQoSWbvRLBXqMsdaR7W4TB/view?usp=drive_link"},
                     {date: "13 May 2024", amount: "376,843 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1lDLoejHTc2cAOEp1rWfBlTnM7xpjDZqL/view?usp=drive_link"},
@@ -968,45 +992,48 @@
             },
             gergely_kulcsar: { 
                 name: "Dr. Gergely Kulcsar", 
-                totalInvestment: 7536872, 
+                totalInvestment: 7012832, 
                 completedPayments: 6, 
                 pendingPayments: 5, 
-                otherFees: 0,
+                otherFees: 312275,
                 investmentShare: "22.50%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1822557,pendingAmount:0,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:749584,pendingAmount:4104,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376028,pendingAmount:814,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376814,pendingAmount:28,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333144,pendingAmount:28,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:668416,pendingAmount:0,type:"5th Installment",status:"completed"},
-                    {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
-                    {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
-                    {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"80% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
+                    {description:"Initial Investment (20%)",dueDate:"20 Sep 2023",installmentAmount:1507376,paymentDates:["20 Sep 2023"],receivedAmounts:[1486738],totalReceived:1486738,amountDue:-20638,status:"completed"},
+                    {description:"Other Fees",dueDate:"20 Sep 2023",installmentAmount:312275,paymentDates:["22 Sep 2023","21 Sep 2023"],receivedAmounts:[298819,37000],totalReceived:335819,amountDue:23544,status:"completed"},
+
+                    {description:"2nd Installment (10%)",dueDate:"18 Nov 2023",installmentAmount:753688,paymentDates:["20 Nov 2023"],receivedAmounts:[749584],totalReceived:749584,amountDue:-4104,status:"completed"},
+                    {description:"3rd Installment (5%)",dueDate:"18 May 2024",installmentAmount:376842,paymentDates:["14 May 2024"],receivedAmounts:[376028],totalReceived:376028,amountDue:-814,status:"completed"},
+                    {description:"4th Installment (5%)",dueDate:"18 Aug 2024",installmentAmount:376842,paymentDates:["9 Aug 2024"],receivedAmounts:[376814],totalReceived:376814,amountDue:-28,status:"completed"},
+                    {description:"5th Installment (5%)",dueDate:"18 Nov 2024",installmentAmount:333172,paymentDates:["9 Dec 2024"],receivedAmounts:[333144],totalReceived:333144,amountDue:-28,status:"completed"},
+ 	            {description:"5th Installment (5%)",dueDate:"03 Aug 2025",installmentAmount:666348,paymentDates:["30 Jun 2025"],receivedAmounts:[668415],totalReceived:668415,amountDue:2067,status:"completed"},
+                    {description:"40% Construction (10%)",dueDate:"7 Jan 2026",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"60% Construction (10%)",dueDate:"10 Jun 2026",installmentAmount:333172,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"80% Construction (5%)",dueDate:"11 Nov 2026",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"90% Construction (10%)",dueDate:"13 Feb 2027",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"100% Construction (10%)",dueDate:"31 Jul 2027",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"}
+
                 ], 
                 paymentDetails: [
-                    {description:"Total Received",amount:4326543,status:"completed"},
-                    {description:"Pending Payment",amount:2998564,status:"pending"}
+                    {description:"Total Received",amount:4326542,status:"completed"},
+                    {description:"Pending Payment",amount:2331868,status:"pending"}
                 ],
                 unitBreakdown: [
-                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368300},
-                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368300},
-                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522650},
-                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525575},
-                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525800},
-                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 22.50, investment: 522650},
-                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522200},
-                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525800},
-                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505775},
-                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 713000},
-                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683075}
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 623555, percentage: 22.50, investment: 140299.88},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368299.8},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368299.8},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522649.8},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525574.8},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525799.8},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 929155, percentage: 22.50, investment: 209059.88},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522199.8},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525799.8},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505774.8},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 712999.8},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683074.8}
                 ],
                 proofOfPayments: [
                     {date: "20 Sep 2023", amount: "1,486,738 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1Pp2yH86c383kfkCu862KBmyuWQhSMZCC/view?usp=drive_link"},
@@ -1021,45 +1048,47 @@
             },
             andreas_koehne: { 
                 name: "Andreas Koehne", 
-                totalInvestment: 7536872, 
+                totalInvestment: 7012832, 
                 completedPayments: 6, 
                 pendingPayments: 5, 
-                otherFees: 0,
+                otherFees: 312275,
                 investmentShare: "22.50%",
                 paymentHistory: [
-                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1956849,pendingAmount:0,type:"Initial Investment",status:"completed"},
-                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753637,pendingAmount:51,type:"1st Installment",status:"completed"},
-                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376814,pendingAmount:28,type:"2nd Installment",status:"completed"},
-                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376814,pendingAmount:28,type:"3rd Installment",status:"completed"},
-                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:348853,pendingAmount:0,type:"4th Installment",status:"completed"},
-                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:513616,pendingAmount:152732,type:"5th Installment",status:"completed"},
-                    {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
-                    {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
-                    {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"80% Construction",status:"pending"},
-                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
+        {description:"Initial Investment (20%)",dueDate:"20 Sep 2023",installmentAmount:1507376,paymentDates:["23 Sep 2023"],receivedAmounts:[1507374],totalReceived:1507374,amountDue:-2,status:"completed"},
+        {description:"Other Fees",dueDate:"20 Sep 2023",installmentAmount:312275,paymentDates:["21 Sep 2023","23 Sep 2023"],receivedAmounts:[148000,301475],totalReceived:449475,amountDue:137200,status:"completed"},
+        {description:"2nd Installment (10%)",dueDate:"18 Nov 2023",installmentAmount:753688,paymentDates:["29 Nov 2023"],receivedAmounts:[753637],totalReceived:753637,amountDue:-51,status:"completed"},
+        {description:"3rd Installment (5%)",dueDate:"18 May 2024",installmentAmount:376842,paymentDates:["14 May 2024"],receivedAmounts:[376814],totalReceived:376814,amountDue:-28,status:"completed"},
+        {description:"4th Installment (5%)",dueDate:"18 Aug 2024",installmentAmount:376842,paymentDates:["13 Aug 2024"],receivedAmounts:[376814],totalReceived:376814,amountDue:-28,status:"completed"},
+        {description:"5th Installment (5%)",dueDate:"18 Nov 2024",installmentAmount:333172,paymentDates:["9 Dec 2024"],receivedAmounts:[348853],totalReceived:348853,amountDue:15681,status:"completed"},
+        {description:"20% Construction (10%)",dueDate:"14 Jul 2025",installmentAmount:666348,paymentDates:["4 Jul 2025","5 Aug 2025"],receivedAmounts:[371299,142317],totalReceived:513616,amountDue:-152732,status:"overdue"},
+        {description:"40% Construction (10%)",dueDate:"7 Jan 2026",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"60% Construction (10%)",dueDate:"10 Jun 2026",installmentAmount:333172,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"80% Construction (5%)",dueDate:"11 Nov 2026",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"90% Construction (10%)",dueDate:"13 Feb 2027",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"},
+        {description:"100% Construction (10%)",dueDate:"31 Jul 2027",installmentAmount:666348,paymentDates:[],receivedAmounts:[],totalReceived:0,amountDue:"",status:"pending"}
+
                 ], 
                 paymentDetails: [
                     {description:"Total Received",amount:4326583,status:"completed"},
                     {description:"Pending Payment",amount:2330564,status:"pending"}
                 ],
                 unitBreakdown: [
-                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368300},
-                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350750},
-                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368300},
-                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522650},
-                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525575},
-                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525800},
-                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 22.50, investment: 522650},
-                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522200},
-                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525800},
-                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505775},
-                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 713000},
-                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683075}
+                   {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 623555, percentage: 22.50, investment: 140299.88},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368299.8},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350749.8},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368299.8},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522649.8},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525574.8},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525799.8},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 929155, percentage: 22.50, investment: 209059.88},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522199.8},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525799.8},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505774.8},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 712999.8},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683074.8}
                 ],
                 proofOfPayments: [
                     {date: "21 Sep 2023", amount: "148,000 AED", type: "Paymaster Investmenter", link: "https://drive.google.com/file/d/1c84Ka9AiG3MM2srQLTv3wKQ4hv7nmiFN/view?usp=drive_link"},
@@ -1102,8 +1131,8 @@
             let totalDueByNow = 0;
             let totalReceived = 0;
             paymentHistory.forEach(payment => {
-                const paymentDate = new Date(payment.date);
-                totalReceived += payment.receivedAmount;
+                const paymentDate = new Date(payment.dueDate);
+                totalReceived += payment.totalReceived;
                 if (paymentDate <= today) {
                     totalDueByNow += payment.installmentAmount;
                 }
@@ -1129,8 +1158,23 @@
             const historyTable = document.getElementById('paymentHistory');
             historyTable.innerHTML = '';
             data.paymentHistory.forEach((payment, index) => {
+                const paymentDatesStr = payment.paymentDates.length > 0 ? payment.paymentDates.join('<br>') : '-';
+                const receivedAmountsStr = payment.receivedAmounts.length > 0 ? 
+                    payment.receivedAmounts.map(amt => `AED ${amt.toLocaleString()}`).join('<br>') : 'AED 0';
+                const balanceClass = payment.amountDue > 0 ? 'positive-balance' : payment.amountDue < 0 ? 'negative-balance' : 'zero-balance';
+                const balancePrefix = payment.amountDue > 0 ? '+' : '';
+                
                 const row = document.createElement('tr');
-                row.innerHTML = `<td>${payment.date}</td><td>AED ${payment.installmentAmount.toLocaleString()}</td><td>AED ${payment.receivedAmount.toLocaleString()}</td><td>AED ${payment.pendingAmount.toLocaleString()}</td><td>${payment.type}</td><td><span class="status ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td><td class="actions-col"><button class="update-btn" onclick="editPayment('${document.getElementById('investorSelect').value}', ${index})">✏️ Edit</button></td>`;
+                row.innerHTML = `
+                    <td>${payment.description}</td>
+                    <td>${payment.dueDate}</td>
+                    <td>AED ${payment.installmentAmount.toLocaleString()}</td>
+                    <td>${paymentDatesStr}</td>
+                    <td>${receivedAmountsStr}</td>
+                    <td class="${balanceClass}">${balancePrefix}AED ${payment.amountDue.toLocaleString()}</td>
+                    <td><span class="status ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td>
+                    <td class="actions-col"><button class="update-btn" onclick="editPayment('${document.getElementById('investorSelect').value}', ${index})">✏️ Edit</button></td>
+                `;
                 historyTable.appendChild(row);
             });
             
@@ -1375,7 +1419,7 @@
             adminTable.innerHTML = ''; 
             data.paymentHistory.forEach((payment, index) => { 
                 const row = document.createElement('tr'); 
-                row.innerHTML = `<td>${payment.date}</td><td>${payment.type}</td><td>AED ${payment.installmentAmount.toLocaleString()}</td><td><input type="number" class="edit-input" value="${payment.receivedAmount}" id="received_${index}" onchange="updateReceivedAmount('${document.getElementById('adminInvestorSelect').value}', ${index}, this.value)"></td><td><span class="status ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td><td><button class="update-btn" onclick="markAsCompleted('${document.getElementById('adminInvestorSelect').value}', ${index})">✅ Complete</button><button class="update-btn" onclick="markAsPending('${document.getElementById('adminInvestorSelect').value}', ${index})">⏳ Pending</button></td>`; 
+                row.innerHTML = `<td>${payment.dueDate}</td><td>${payment.description}</td><td>AED ${payment.installmentAmount.toLocaleString()}</td><td><input type="number" class="edit-input" value="${payment.totalReceived}" id="received_${index}" onchange="updateReceivedAmount('${document.getElementById('adminInvestorSelect').value}', ${index}, this.value)"></td><td><span class="status ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td><td><button class="update-btn" onclick="markAsCompleted('${document.getElementById('adminInvestorSelect').value}', ${index})">✅ Complete</button><button class="update-btn" onclick="markAsPending('${document.getElementById('adminInvestorSelect').value}', ${index})">⏳ Pending</button></td>`; 
                 adminTable.appendChild(row); 
             }); 
         }
@@ -1383,8 +1427,8 @@
         function updateReceivedAmount(investorKey, paymentIndex, newAmount) {
             const amount = parseFloat(newAmount) || 0;
             const payment = investorData[investorKey].paymentHistory[paymentIndex];
-            payment.receivedAmount = amount;
-            payment.pendingAmount = Math.max(0, payment.installmentAmount - amount);
+            payment.totalReceived = amount;
+            payment.amountDue = amount - payment.installmentAmount;
             if (amount > 0 && amount >= payment.installmentAmount) {
                 payment.status = 'completed';
             } else if (amount > 0) {
@@ -1402,8 +1446,8 @@
         
         function markAsCompleted(investorKey, paymentIndex) {
             const payment = investorData[investorKey].paymentHistory[paymentIndex];
-            payment.receivedAmount = payment.installmentAmount;
-            payment.pendingAmount = 0;
+            payment.totalReceived = payment.installmentAmount;
+            payment.amountDue = 0;
             payment.status = 'completed';
             updatePaymentDetails(investorKey);
             if (document.getElementById('investorSelect').value === investorKey) {
@@ -1415,8 +1459,8 @@
         
         function markAsPending(investorKey, paymentIndex) {
             const payment = investorData[investorKey].paymentHistory[paymentIndex];
-            payment.receivedAmount = 0;
-            payment.pendingAmount = payment.installmentAmount;
+            payment.totalReceived = 0;
+            payment.amountDue = -payment.installmentAmount;
             payment.status = 'pending';
             updatePaymentDetails(investorKey);
             if (document.getElementById('investorSelect').value === investorKey) {
@@ -1435,8 +1479,10 @@
                 if (p.status === 'completed') {
                     completedCount++;
                 }
-                totalReceived += p.receivedAmount;
-                totalPending += p.pendingAmount;
+                totalReceived += p.totalReceived;
+                if (p.amountDue < 0) {
+                    totalPending += Math.abs(p.amountDue);
+                }
             }); 
             
             data.paymentDetails = [
@@ -1448,7 +1494,7 @@
         }
         
         function editPayment(investorKey, paymentIndex) { 
-            const newAmount = prompt("Enter received amount:", investorData[investorKey].paymentHistory[paymentIndex].receivedAmount); 
+            const newAmount = prompt("Enter received amount:", investorData[investorKey].paymentHistory[paymentIndex].totalReceived); 
             if (newAmount !== null) { 
                 updateReceivedAmount(investorKey, paymentIndex, newAmount); 
             } 
@@ -1487,5 +1533,3 @@
     </script>
 </body>
 </html>
-
-
