@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Statement Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            color: #000201;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #000201;
+            color: #ffffff;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #CBA735;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .admin-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(203, 167, 53, 0.2);
+            color: #CBA735;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .admin-toggle-btn {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            background: #CBA735;
+            color: #000201;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(203, 167, 53, 0.3);
+            transition: transform 0.2s, background 0.3s;
+        }
+
+        .admin-toggle-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        body.admin-mode-active .admin-toggle-btn {
+             background: #c23b22;
+             color: #ffffff;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .investor-selector {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .investor-selector label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #000201;
+        }
+
+        .investor-selector select {
+            padding: 12px 20px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            color: #000201;
+            cursor: pointer;
+            min-width: 250px;
+        }
+
+        .investor-selector select:focus {
+            outline: none;
+            border-color: #CBA735;
+        }
+
+        /* Tab Styles */
+        .tab-container {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .tab-navigation {
+            display: flex;
+            border-bottom: 3px solid #e1e8ed;
+            margin-bottom: 30px;
+            background: #f8fafc;
+            border-radius: 10px 10px 0 0;
+            overflow: hidden;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            background: #f8fafc;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #64748b;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab-button:hover {
+            background: #e2e8f0;
+            color: #334155;
+        }
+
+        .tab-button.active {
+            background: #ffffff;
+            color: #000201;
+            border-bottom: 3px solid #CBA735;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .statement-header {
+            background: #fdfdfd;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            border-left: 5px solid #CBA735;
+        }
+
+        .statement-header h2 {
+            color: #000201;
+            margin-bottom: 5px;
+        }
+
+        .statement-header p {
+            color: #555;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .summary-card {
+            background: #CBA735;
+            color: #000201;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(203, 167, 53, 0.3);
+        }
+
+        .summary-card h3 {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .summary-card .value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .summary-card .value .status-label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 5px;
+            opacity: 1;
+        }
+        .summary-card .value .status-label.excess {
+            color: #107c10;
+        }
+        .summary-card .value .status-label.due {
+            color: #a4262c;
+        }
+        .summary-card .value .status-label.balanced {
+            color: #000201;
+        }
+
+        .section {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section h3 {
+            color: #000201;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .payment-table, .unit-table, .proof-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .payment-table th, .unit-table th, .proof-table th {
+            background: #000201;
+            color: #ffffff;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .payment-table td, .unit-table td, .proof-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .payment-table tr:hover, .unit-table tr:hover, .proof-table tr:hover {
+            background: #f7fafc;
+        }
+        
+        .actions-col { display: none; }
+        body.admin-mode-active .actions-col { display: table-cell; }
+
+        .status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status.completed {
+            background: #e6f3e6;
+            color: #174A1C;
+        }
+
+        .status.pending {
+            background: #eeeeee;
+            color: #000201;
+        }
+
+        .download-btn {
+            background: #CBA735;
+            color: #000201;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+
+        .download-btn:hover {
+            background: #b8962e;
+            transform: translateY(-1px);
+        }
+
+        .unit-breakdown {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .unit-breakdown h3 {
+            color: #000201;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .investor-share {
+            background: #CBA735;
+            color: #000201;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+        
+        .action-buttons-container {
+            margin-top: 20px;
+        }
+
+        .generate-btn, .print-btn, .request-btn {
+            color: #ffffff;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0, 0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .generate-btn:hover, .print-btn:hover, .request-btn:hover {
+             transform: translateY(-2px);
+             box-shadow: 0 6px 20px rgba(0,0,0, 0.25);
+        }
+
+        .generate-btn { background: #000201; }
+        .print-btn { background: #000201; }
+        .request-btn { background: #CBA735; color: #000201; }
+
+        .admin-panel {
+            background: #ffffff;
+            border: 2px solid #CBA735;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(203, 167, 53, 0.2);
+        }
+
+        .admin-header {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #000201;
+        }
+
+        .admin-header h3 {
+            margin-bottom: 5px;
+        }
+
+        .admin-controls {
+             margin-bottom: 20px;
+        }
+
+        .admin-controls label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #000201;
+        }
+
+        .admin-controls select {
+            padding: 12px 20px;
+            border: 2px solid #CBA735;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            min-width: 250px;
+            width: 100%;
+        }
+
+        .update-btn {
+            background: #CBA735;
+            color: #000201;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-right: 5px;
+            box-shadow: 0 2px 8px rgba(0,0,0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .update-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .edit-input {
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            padding: 6px 10px;
+            font-size: 0.9rem;
+            width: 120px;
+        }
+
+        .proof-section {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .proof-section h3 {
+            color: #000201;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .proof-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            background: #f8fafc;
+        }
+
+        .upload-section {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px dashed #CBA735;
+        }
+
+        .upload-section h4 {
+            color: #000201;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .upload-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .upload-input {
+            padding: 10px;
+            border: 1px solid #e1e8ed;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .upload-input:focus {
+            outline: none;
+            border-color: #CBA735;
+        }
+
+        .upload-btn {
+            background: #CBA735;
+            color: #000201;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            grid-column: span 2;
+            transition: all 0.2s;
+        }
+
+        .upload-btn:hover {
+            background: #b8962e;
+            transform: translateY(-1px);
+        }
+
+        .upload-preview {
+            background: #e6f3e6;
+            border: 1px solid #CBA735;
+            border-radius: 6px;
+            padding: 10px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #174A1C;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .delete-btn:hover {
+            background: #c82333;
+        }
+
+        .proof-item:hover {
+            background: #f1f5f9;
+        }
+
+        .proof-info {
+            flex: 1;
+        }
+
+        .proof-info h4 {
+            color: #000201;
+            margin-bottom: 5px;
+        }
+
+        .proof-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="admin-badge" style="display: none;">Admin Mode</div>
+            <button class="admin-toggle-btn" onclick="toggleAdminPanel()">🔧 Admin Panel</button>
+            <h1>Investment Statement Portal</h1>
+            <p>Your personalized investment statement overview</p>
+        </div>
+
+        <div class="content">
+            <div class="investor-selector">
+                <label for="investorSelect">Select Your Name:</label>
+                <select id="investorSelect">
+                    <option value="">Choose an investor...</option>
+                    <option value="jens_rabe">Jens Rabe</option>
+                    <option value="michael_menter">Michael Menter</option>
+                    <option value="alexander_neubauer">Dr. Alexander Neubauer</option>
+                    <option value="fuat_atar">Fuat Atar</option>
+                    <option value="gergely_kulcsar">Dr. Gergely Kulcsar</option>
+                    <option value="andreas_koehne">Andreas Koehne</option>
+                </select>
+            </div>
+
+            <div id="adminPanel" class="admin-panel" style="display: none;">
+                <div class="admin-header">
+                    <h3>🛠️ Payment Management</h3>
+                    <p>Update payment status and amounts</p>
+                </div>
+                <div class="admin-controls">
+                    <label for="adminInvestorSelect">Select Investor to Manage:</label>
+                    <select id="adminInvestorSelect">
+                        <option value="">Choose an investor...</option>
+                        <option value="jens_rabe">Jens Rabe</option>
+                        <option value="michael_menter">Michael Menter</option>
+                        <option value="alexander_neubauer">Dr. Alexander Neubauer</option>
+                        <option value="fuat_atar">Fuat Atar</option>
+                        <option value="gergely_kulcsar">Dr. Gergely Kulcsar</option>
+                        <option value="andreas_koehne">Andreas Koehne</option>
+                    </select>
+                </div>
+                <div id="adminPaymentTable" style="display: none;">
+                    <table class="payment-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Type</th>
+                                <th>Installment</th>
+                                <th>Received</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="adminPaymentHistory">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div id="tabContainer" class="tab-container">
+                <div class="statement-header">
+                    <h2 id="investorName">Investment Statement</h2>
+                    <p id="statementDate">Statement generated on 06/08/2025</p>
+                </div>
+
+                <div class="tab-navigation">
+                    <button class="tab-button active" onclick="switchTab(event, 'statement')">📊 Statement</button>
+                    <button class="tab-button" onclick="switchTab(event, 'units')">🏠 Investment per Unit</button>
+                    <button class="tab-button" onclick="switchTab(event, 'proof')">📄 Proof of Payment</button>
+                </div>
+
+                <!-- Statement Tab -->
+                <div id="statement" class="tab-content active">
+                    <div class="summary-grid">
+                        <div class="summary-card">
+                            <h3>Total Investment</h3>
+                            <div class="value" id="totalInvestment">AED 0</div>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Completed Payments</h3>
+                            <div class="value" id="completedPayments">0</div>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Pending Payments</h3>
+                            <div class="value" id="pendingPayments">0</div>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Other Fees</h3>
+                            <div class="value" id="otherFees">AED 0</div>
+                        </div>
+                        <div class="summary-card">
+                            <h3>Payment Status</h3>
+                            <div class="value" id="paymentStatus">--</div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Investment History</h3>
+                        <table class="payment-table">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Installment Amount</th>
+                                    <th>Received Amount</th>
+                                    <th>Pending Amount</th>
+                                    <th>Type</th>
+                                    <th>Status</th>
+                                    <th class="actions-col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentHistory">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="section">
+                        <h3>Payment Details</h3>
+                        <table class="payment-table">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Amount (AED)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="paymentDetails">
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="action-buttons-container">
+                        <button class="generate-btn" onclick="generateStatement()">📄 Generate Full Statement</button>
+                        <button class="print-btn" onclick="window.print()">🖨️ Print Statement</button>
+                        <button class="request-btn" onclick="requestDetails()">📧 Request More Details</button>
+                    </div>
+                </div>
+
+                <!-- Investment per Unit Tab -->
+                <div id="units" class="tab-content">
+                    <div class="unit-breakdown">
+                        <h3>Investment Breakdown per Unit</h3>
+                        <div id="investorShare" class="investor-share"></div>
+                        <table class="unit-table">
+                            <thead>
+                                <tr>
+                                    <th>Unit Type</th>
+                                    <th>Total Value (AED)</th>
+                                    <th>% on Investment</th>
+                                    <th>Your Investment (AED)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="unitBreakdown">
+                            </tbody>
+                        </table>
+                        <div class="action-buttons-container">
+                            <button class="generate-btn" onclick="downloadUnitBreakdown()">📊 Download Unit Report</button>
+                            <button class="print-btn" onclick="window.print()">🖨️ Print Unit Breakdown</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Proof of Payment Tab -->
+                <div id="proof" class="tab-content">
+                    <div class="proof-section">
+                        <h3>Proof of Payment Documents</h3>
+                        
+                        <!-- Upload Section -->
+                        <div class="upload-section">
+                            <h4>📤 Upload New Proof of Payment</h4>
+                            <div class="upload-form">
+                                <input type="date" id="uploadDate" class="upload-input" placeholder="Payment Date">
+                                <input type="text" id="uploadAmount" class="upload-input" placeholder="Amount (e.g., 150,000 AED)">
+                                <input type="text" id="uploadType" class="upload-input" placeholder="Payment Type (e.g., Bank Transfer)">
+                                <input type="file" id="uploadFile" class="upload-input" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+                                <button class="upload-btn" onclick="uploadProofDocument()">📁 Upload Document</button>
+                            </div>
+                            <div id="uploadPreview" style="display: none;"></div>
+                        </div>
+
+                        <div id="proofOfPayments">
+                        </div>
+                        <div class="action-buttons-container">
+                            <button class="request-btn" onclick="requestProofHelp()">📧 Request Missing Documents</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let isAdminMode = false;
+        const today = new Date('2025-08-06');
+        let investorData = {};
+        let uploadedDocuments = {}; // Store uploaded documents in memory
+
+        // Enhanced data structure with unit breakdown and proof of payments
+        const defaultInvestorData = {
+            jens_rabe: { 
+                name: "Jens Rabe", 
+                totalInvestment: 1558407, 
+                completedPayments: 6, 
+                pendingPayments: 4, 
+                otherFees: 0,
+                investmentShare: "5%",
+                paymentHistory: [
+                    {date:"20 Sep 2023",installmentAmount:404366,receivedAmount:404366,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:167486,receivedAmount:167486,pendingAmount:0,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:74038,receivedAmount:74038,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:148077,receivedAmount:148077,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"10 Jun 2026",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"20% Construction",status:"pending"},
+                    {date:"11 Nov 2026",installmentAmount:74038,receivedAmount:0,pendingAmount:74038,type:"40% Construction",status:"pending"},
+                    {date:"13 Feb 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"60% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"80% Construction",status:"pending"}
+                ], 
+                paymentDetails: [
+                    {description:"Received Value",amount:148077,status:"completed"},
+                    {description:"Pending Payment",amount:518269,status:"pending"}
+                ],
+                unitBreakdown: [
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 5, investment: 31178},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 5, investment: 81844},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 5, investment: 81844},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 5, investment: 116144},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 5, investment: 116794},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 5, investment: 116844},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 5, investment: 46458},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 5, investment: 116044},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 5, investment: 116844},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 5, investment: 112394},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 5, investment: 158444},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 5, investment: 151794}
+                ],
+                proofOfPayments: [
+                    {date: "19 Sep 2023", amount: "334,972 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/14-VmkITOvGw46FajSpU1EvnVwj3rco/view?usp=drive_link"},
+                    {date: "19 Sep 2023", amount: "66,994 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1wa6uVVrU-h2v9xvlceAZxvVXG7J-IRFP/view?usp=drive_link"},
+                    {date: "20 Nov 2023", amount: "52,378 AED", type: "SWIFT from Investmenter", link: "https://drive.google.com/file/d/1PU_-3TqroCFQfM1XYsF-36uxXIvZXQ2_DG/view?usp=drive_link"},
+                    {date: "23 Nov 2023", amount: "50,000 AED", type: "SWIFT from Emirates NBD Rabe", link: "https://drive.google.com/file/d/1Jm7vm8MIHwmw43QqQMQQsFfEKFNrGH/view?usp=sharing"},
+                    {date: "23 Nov 2023", amount: "65,107 AED", type: "SWIFT from Emirates NBD Rabe", link: "https://drive.google.com/file/d/1EA-frFSkCBYZ3jXkBXFSVJG8Vm6WB1vs/view?usp=drive_link"},
+                    {date: "02 Jul 2024", amount: "83,743 AED", type: "SWIFT from Mashreq", link: "https://drive.google.com/file/d/1jNq2PNvz-FmY-tlfBCpERZ22BtDfp8nX3/view?usp=drive_link"},
+                    {date: "09 Aug 2024", amount: "83,743 AED", type: "SWIFT from Mashreq", link: "https://drive.google.com/file/d/127CbvxA_SC2KnBkOrUFLvpD2rtKvw5X/view?usp=drive_link"},
+                    {date: "09 Dec 2024", amount: "74,039 AED", type: "Income from 704 and 710", link: "https://drive.google.com/drive/folders/1GtuCZdh2cAnb0UEfU2o9V_te6w3aSfK?usp=sharing"},
+                    {date: "04 Jul 2025", amount: "31,626 AED", type: "Income from 704 and 710", link: "https://drive.google.com/file/d/12VlUNg5gy3VuRBy-mnLw6j_-S1ubrRCB/view?usp=drive_link"}
+                ]
+            },
+            michael_menter: { 
+                name: "Michael Menter", 
+                totalInvestment: 7536872, 
+                completedPayments: 6, 
+                pendingPayments: 5, 
+                otherFees: 0,
+                investmentShare: "22.50%",
+                paymentHistory: [
+                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819651,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753688,pendingAmount:0,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333172,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:666348,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
+                    {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
+                    {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"80% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
+                ], 
+                paymentDetails: [
+                    {description:"Received Value",amount:666348,status:"completed"},
+                    {description:"Pending Payment",amount:2998564,status:"pending"}
+                ],
+                unitBreakdown: [
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368300},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368300},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522650},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525575},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525800},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 22.50, investment: 522650},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522200},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525800},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505775},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 713000},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683075}
+                ],
+                proofOfPayments: [
+                    {date: "23 Sep 2023", amount: "483,333 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1VCxo9SMCe1qeoBZ5-hnGpkf_H9Ytp4xr/view?usp=drive_link"},
+                    {date: "23 Sep 2023", amount: "1,024,041 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1OC4HqkBfRrv9RKTPMH3ZGmJUrUvvWCKO/view?usp=drive_link"},
+                    {date: "21 Sep 2023", amount: "98,275 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1kAXareBV8WSRb7n_TqCJIGc28LPjx0k/view?usp=drive_link"},
+                    {date: "22 Sep 2023", amount: "214,000 AED", type: "Credit Card Payment", link: "https://drive.google.com/file/d/12WSJFVJ3vvVs_1rJGoHaqDxt-CZ/view?usp=drive_link"},
+                    {date: "06 Oct 2023", amount: "29,056 AED", type: "Credit Card Payment", link: "https://drive.google.com/file/d/1gcCrzQuWANIVL_7N5PopCWrY7eMFQVCF/view?usp=drive_link"},
+                    {date: "21 Nov 2023", amount: "151,855 AED", type: "Credit Card Payment", link: "https://drive.google.com/file/d/1DYnuFoled2FHuvlliig-qwF_x9F3pIxY/view?usp=drive_link"},
+                    {date: "21 Nov 2023", amount: "100,000 AED", type: "Credit Card Payment", link: "https://drive.google.com/file/d/1MnHIAx0VNN6oRfp9Lw75ucL-blpNDgAS/view?usp=drive_link"},
+                    {date: "21 Nov 2023", amount: "500,000 AED", type: "Who Inns Personal Account", link: "https://drive.google.com/file/d/1CB0G7z5PHt6Paq0IJPgz9vZq6gJIBqZZ6S/view?usp=drive_link"},
+                    {date: "15 May 2024", amount: "376,844 AED", type: "Michael Menter Transaction", link: "https://drive.google.com/file/d/1HOrWo4gFWnMXCIC0UnXBuIvNDD-5rVj/view?usp=drive_link"},
+                    {date: "24 May 2024", amount: "73,050 AED", type: "Michael Menter Transaction", link: "https://drive.google.com/file/d/1_TSQ5QYCGuaxP8I6SUtrk_9xSxH0KMQ/view?usp=drive_link"},
+                    {date: "23 Aug 2024", amount: "275,770 AED", type: "Michael Menter Transaction", link: "https://drive.google.com/file/d/1XHtyvrrMt2FrWKLIwxJaFJEILFlnLPPS/view?usp=drive_link"},
+                    {date: "09 Dec 2024", amount: "333,174 AED", type: "Income from 704 and 710", link: "https://drive.google.com/drive/folders/1GtuCZdh2cAnb0UEfU2o9V_te6w3aSfK?usp=sharing"},
+                    {date: "06 Aug 2025", amount: "524,828 AED", type: "Bank Transfer", link: "https://drive.google.com/file/d/18LgjsI6vcSYMPGJIBxXCKP4N4e_lNsmU/view?usp=sharing"},
+                    {date: "05 Aug 2025", amount: "142,317 AED", type: "Income from 704 and 710", link: "https://drive.google.com/file/d/12VlUNg5gy3VuRBy-mnLw6j_-S1ubrRCB/view?usp=drive_link"}
+                ]
+            },
+            alexander_neubauer: { 
+                name: "Dr. Alexander Neubauer", 
+                totalInvestment: 1674860, 
+                completedPayments: 6, 
+                pendingPayments: 4, 
+                otherFees: 0,
+                investmentShare: "5%",
+                paymentHistory: [
+                    {date:"20 Sep 2023",installmentAmount:404366,receivedAmount:404366,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:167486,receivedAmount:167486,pendingAmount:0,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:83743,receivedAmount:83743,pendingAmount:0,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:74038,receivedAmount:74038,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:148077,receivedAmount:148077,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"10 Jun 2026",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"20% Construction",status:"pending"},
+                    {date:"11 Nov 2026",installmentAmount:74038,receivedAmount:0,pendingAmount:74038,type:"40% Construction",status:"pending"},
+                    {date:"13 Feb 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"60% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:148077,receivedAmount:0,pendingAmount:148077,type:"80% Construction",status:"pending"}
+                ], 
+                paymentDetails: [
+                    {description:"Received Value",amount:148077,status:"completed"},
+                    {description:"Pending Payment",amount:518269,status:"pending"}
+                ],
+                unitBreakdown: [
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 5, investment: 81844},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 5, investment: 77944},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 5, investment: 81844},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 5, investment: 116144},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 5, investment: 116794},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 5, investment: 116844},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 5, investment: 116144},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 5, investment: 116044},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 5, investment: 116844},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 5, investment: 112394},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 5, investment: 158444},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 5, investment: 151794}
+                ],
+                proofOfPayments: [
+                    {date: "19 Sep 2023", amount: "334,972 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1QBKAwitQMPhhbvDbV-hLMsmvmJ46DOj/view?usp=drive_link"},
+                    {date: "19 Sep 2023", amount: "66,994 AED", type: "Cheque Investmenter Real Estate LLC", link: "https://drive.google.com/file/d/1i_u3yux8bAdKbMKMY5XY18PgMhkpg1Ym/view?usp=drive_link"},
+                    {date: "20 Nov 2023", amount: "167,486 AED", type: "SWIFT from Investmenter", link: "https://drive.google.com/file/d/1Qnt2nQFIt1Y5ZeULRRS7DIGvKAEvuHSS/view?usp=sharing"},
+                    {date: "13 May 2024", amount: "83,743 AED", type: "SWIFT from Investmenter", link: "https://drive.google.com/file/d/1UayKKGquKnIbIv1Bt2QE_RAH_aGZCIV/view?usp=drive_link"},
+                    {date: "23 Aug 2024", amount: "83,743 AED", type: "SWIFT from Investmenter", link: "https://drive.google.com/file/d/1YfaQmyjEYq5fl-7PwfcySHI0Ng2_RWBdn/view?usp=drive_link"},
+                    {date: "09 Dec 2024", amount: "74,039 AED", type: "Income from 704 and 710", link: "https://drive.google.com/drive/folders/1GtuCZdh2cAnb0UEfU2o9V_te6w3aSfK?usp=sharing"},
+                    {date: "01 Jul 2025", amount: "118,850 AED", type: "Bank Transfer", link: "https://drive.google.com/file/d/1cD9QMVHbmJsKb2dXTo8FJBu-waxa78Il/view?usp=sharing"},
+                    {date: "05 Aug 2025", amount: "31,626 AED", type: "Income from 704 and 710", link: "https://drive.google.com/file/d/12VlUNg5gy3VuRBy-mnLw6j_-S1ubrRCB/view?usp=drive_link"}
+                ]
+            },
+            fuat_atar: { 
+                name: "Fuat Atar", 
+                totalInvestment: 7536872, 
+                completedPayments: 6, 
+                pendingPayments: 5, 
+                otherFees: 0,
+                investmentShare: "22.50%",
+                paymentHistory: [
+                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819651,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753688,pendingAmount:0,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333172,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:666348,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
+                    {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
+                    {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"80% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
+                ], 
+                paymentDetails: [
+                    {description:"Received Value",amount:666348,status:"completed"},
+                    {description:"Pending Payment",amount:2998564,status:"pending"}
+                ],
+                unitBreakdown: [
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368300},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368300},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522650},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525575},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525800},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 22.50, investment: 522650},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522200},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525800},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505775},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 713000},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683075}
+                ],
+                proofOfPayments: [
+                    {date: "20 Sep 2023", amount: "1,507,374 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1GLDsH8r1gxvcV9bmRz5PEKJpXJtsqPB/view?usp=drive_link"},
+                    {date: "20 Sep 2023", amount: "312,275 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1PWecuaWHxm_XJW2yuWyCfYO-UWWzheLE/view?usp=drive_link"},
+                    {date: "20 Nov 2023", amount: "753,687 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1c_F3CV6Hh6JQoSWbyRLBXqMsdaR7WA4TB/view?usp=drive_link"},
+                    {date: "13 May 2024", amount: "376,843 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1Jm6qGHTc2o4OEp1-WfBJTdvM7xjqDZkI/view?usp=drive_link"},
+                    {date: "11 Aug 2024", amount: "376,844 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1STJaaTdaHLO2Y4qWe7-VlhepKurIDMXO/view?usp=drive_link"},
+                    {date: "09 Dec 2024", amount: "333,174 AED", type: "Income from 704 and 710", link: "https://drive.google.com/drive/folders/1GtuCZdh2cAnb0UEfU2o9V_te6w3aSfK?usp=sharing"},
+                    {date: "04 Aug 2025", amount: "524,033 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1QNYkRKMicO-PI9RdyWxQTOUC_eL-2SLHY/view?usp=sharing"},
+                    {date: "05 Aug 2025", amount: "142,317 AED", type: "Income from 704 and 710", link: "https://drive.google.com/file/d/12VlUNg5gy3VuRBy-mnLw6j_-S1ubrRCB/view?usp=drive_link"}
+                ]
+            },
+            gergely_kulcsar: { 
+                name: "Dr. Gergely Kulcsar", 
+                totalInvestment: 7536872, 
+                completedPayments: 5, 
+                pendingPayments: 6, 
+                otherFees: 0,
+                investmentShare: "22.50%",
+                paymentHistory: [
+                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819651,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753688,pendingAmount:0,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333172,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"5th Installment",status:"pending"},
+                    {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
+                    {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
+                    {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"80% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
+                ], 
+                paymentDetails: [
+                    {description:"Received Value",amount:333172,status:"completed"},
+                    {description:"Pending Payment",amount:3664220,status:"pending"}
+                ],
+                unitBreakdown: [
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368300},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368300},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522650},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525575},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525800},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 22.50, investment: 522650},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522200},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525800},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505775},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 713000},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683075}
+                ],
+                proofOfPayments: [
+                    {date: "20 Sep 2023", amount: "1,486,738 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1Pp2yH86c383kfkCu862KBmyuWQhSMZCC/view?usp=drive_link"},
+                    {date: "22 Sep 2023", amount: "298,819 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1pWmFinSFXvZrBUjjpulSVBa-2kr_WFPt/view?usp=drive_link"},
+                    {date: "21 Sep 2023", amount: "37,000 AED", type: "Paymaster Investmenter", link: "https://drive.google.com/file/d/1i7FCCtqUgOQpGnODKHalkEulx6g4Vj-v/view?usp=drive_link"},
+                    {date: "20 Nov 2023", amount: "749,584 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/12tw6Md_GYusaaf7nHagXKU7Lr8IZHn/view?usp=drive_link"},
+                    {date: "14 May 2024", amount: "376,028 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1AX8GfJUO-vtBCwyxqsIiCJUEareEt-xbCU/view?usp=drive_link"},
+                    {date: "09 Aug 2024", amount: "376,814 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1hFoLM_oWr6oGp6KTpQN4ppvLBN2lH5/view?usp=drive_link"},
+                    {date: "09 Dec 2024", amount: "333,144 AED", type: "Income from 704 and 710 + 87,619.28", link: "https://drive.google.com/drive/folders/1GtuCZdh2cAnb0UEfU2o9V_te6w3aSfK?usp=sharing"},
+                    {date: "30 Jun 2025", amount: "668,415 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/13wA_juBfRC-2_S5_Np27vEFZdTK70rek/view?usp=drive_link"}
+                ]
+            },
+            andreas_koehne: { 
+                name: "Andreas Koehne", 
+                totalInvestment: 7536872, 
+                completedPayments: 6, 
+                pendingPayments: 5, 
+                otherFees: 0,
+                investmentShare: "22.50%",
+                paymentHistory: [
+                    {date:"20 Sep 2023",installmentAmount:1819651,receivedAmount:1819651,pendingAmount:0,type:"Initial Investment",status:"completed"},
+                    {date:"18 Nov 2023",installmentAmount:753688,receivedAmount:753688,pendingAmount:0,type:"1st Installment",status:"completed"},
+                    {date:"18 May 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"2nd Installment",status:"completed"},
+                    {date:"18 Aug 2024",installmentAmount:376842,receivedAmount:376842,pendingAmount:0,type:"3rd Installment",status:"completed"},
+                    {date:"18 Nov 2024",installmentAmount:333172,receivedAmount:333172,pendingAmount:0,type:"4th Installment",status:"completed"},
+                    {date:"14 Jul 2025",installmentAmount:666348,receivedAmount:666348,pendingAmount:0,type:"5th Installment",status:"completed"},
+                    {date:"10 Jun 2026",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"20% Construction",status:"pending"},
+                    {date:"11 Nov 2026",installmentAmount:333172,receivedAmount:0,pendingAmount:333172,type:"40% Construction",status:"pending"},
+                    {date:"13 Feb 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"60% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"80% Construction",status:"pending"},
+                    {date:"31 Jul 2027",installmentAmount:666348,receivedAmount:0,pendingAmount:666348,type:"100% Construction",status:"pending"}
+                ], 
+                paymentDetails: [
+                    {description:"Received Value",amount:666348,status:"completed"},
+                    {description:"Pending Payment",amount:2998564,status:"pending"}
+                ],
+                unitBreakdown: [
+                    {unitType: "1 Bedroom (702)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (704) - Sold", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (705)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (706)", totalValue: 1636888, percentage: 22.50, investment: 368300},
+                    {unitType: "1 Bedroom (707)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (709)", totalValue: 1558888, percentage: 22.50, investment: 350750},
+                    {unitType: "1 Bedroom (714)", totalValue: 1636888, percentage: 22.50, investment: 368300},
+                    {unitType: "2 Bedroom (701)", totalValue: 2322888, percentage: 22.50, investment: 522650},
+                    {unitType: "2 Bedroom (703)", totalValue: 2335888, percentage: 22.50, investment: 525575},
+                    {unitType: "2 Bedroom (708)", totalValue: 2336888, percentage: 22.50, investment: 525800},
+                    {unitType: "2 Bedroom (710) - Sold", totalValue: 2322888, percentage: 22.50, investment: 522650},
+                    {unitType: "2 Bedroom (711)", totalValue: 2320888, percentage: 22.50, investment: 522200},
+                    {unitType: "2 Bedroom (712)", totalValue: 2336888, percentage: 22.50, investment: 525800},
+                    {unitType: "2 Bedroom (713)", totalValue: 2247888, percentage: 22.50, investment: 505775},
+                    {unitType: "3 Bedroom (715)", totalValue: 3168888, percentage: 22.50, investment: 713000},
+                    {unitType: "3 Bedroom (716)", totalValue: 3035888, percentage: 22.50, investment: 683075}
+                ],
+                proofOfPayments: [
+                    {date: "21 Sep 2023", amount: "148,000 AED", type: "Paymaster Investmenter", link: "https://drive.google.com/file/d/1c84Ka9AIG3MM2srQLTv3wKQ4hv7nmjFN/view?usp=drive_link"},
+                    {date: "23 Sep 2023", amount: "1,507,374 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1MKgdoVUoudzItVIwtO53q5y-1tpPxtjhm/view?usp=drive_link"},
+                    {date: "23 Sep 2023", amount: "301,475 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1k7Mjl4QYjMio2xvbjI42dSwdrUQROFFZ7/view?usp=drive_link"},
+                    {date: "29 Nov 2023", amount: "753,637 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1GRQwhTOvTsEhxzKVxxO3JTfBWuz6z/view?usp=drive_link"},
+                    {date: "14 May 2024", amount: "376,814 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1IVbF_3bdwHM5uVmYiCcDKATCJ7UmEEh5/view?usp=drive_link"},
+                    {date: "13 Aug 2024", amount: "376,814 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1WHhb1xU9zHCbO6rkmlXc7dH_02YAKjZ/view?usp=drive_link"},
+                    {date: "09 Dec 2024", amount: "348,853 AED", type: "Income from 704 and 710", link: "https://drive.google.com/drive/folders/1GtuCZdh2cAnb0UEfU2o9V_te6w3aSfK?usp=sharing"},
+                    {date: "04 Jul 2025", amount: "371,299 AED", type: "Bank Transaction", link: "https://drive.google.com/file/d/1ldBNPJypE14l5KV3zHxvcGwW2jVfv/view?usp=sharing"},
+                    {date: "05 Aug 2025", amount: "142,317 AED", type: "Income from 704 and 710", link: "https://drive.google.com/file/d/12VlUNg5gy3VuRBy-mnLw6j_-S1ubrRCB/view?usp=drive_link"}
+                ]
+            }
+        };
+
+        // Load and save data functions
+        function loadData() {
+            const savedData = localStorage.getItem('investorData');
+            const savedUploads = localStorage.getItem('uploadedDocuments');
+            
+            if (savedData) {
+                investorData = JSON.parse(savedData);
+            } else {
+                investorData = defaultInvestorData;
+            }
+            
+            if (savedUploads) {
+                uploadedDocuments = JSON.parse(savedUploads);
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem('investorData', JSON.stringify(investorData));
+            localStorage.setItem('uploadedDocuments', JSON.stringify(uploadedDocuments));
+        }
+
+        // Tab switching function
+        function switchTab(evt, tabName) {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            evt.currentTarget.classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+
+        function calculateDueBalance(paymentHistory) {
+            let totalDueByNow = 0;
+            let totalReceived = 0;
+            paymentHistory.forEach(payment => {
+                const paymentDate = new Date(payment.date);
+                totalReceived += payment.receivedAmount;
+                if (paymentDate <= today) {
+                    totalDueByNow += payment.installmentAmount;
+                }
+            });
+            const balance = totalReceived - totalDueByNow;
+            if (balance > 0) { return { status: 'excess', amount: balance }; }
+            else if (balance < 0) { return { status: 'due', amount: Math.abs(balance) }; }
+            else { return { status: 'balanced', amount: 0 }; }
+        }
+
+        function displayStatement(data) {
+            document.getElementById('investorName').textContent = `Investment Statement - ${data.name}`;
+            const dueBalance = calculateDueBalance(data.paymentHistory);
+            const paymentStatusEl = document.getElementById('paymentStatus');
+            paymentStatusEl.innerHTML = `AED ${dueBalance.amount.toLocaleString()}<span class="status-label ${dueBalance.status}">(${dueBalance.status.charAt(0).toUpperCase() + dueBalance.status.slice(1)})</span>`;
+            
+            document.getElementById('totalInvestment').textContent = `AED ${data.totalInvestment.toLocaleString()}`;
+            document.getElementById('completedPayments').textContent = data.completedPayments;
+            document.getElementById('pendingPayments').textContent = data.pendingPayments;
+            document.getElementById('otherFees').textContent = `AED ${data.otherFees.toLocaleString()}`;
+            
+            // Payment history table
+            const historyTable = document.getElementById('paymentHistory');
+            historyTable.innerHTML = '';
+            data.paymentHistory.forEach((payment, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${payment.date}</td><td>AED ${payment.installmentAmount.toLocaleString()}</td><td>AED ${payment.receivedAmount.toLocaleString()}</td><td>AED ${payment.pendingAmount.toLocaleString()}</td><td>${payment.type}</td><td><span class="status ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td><td class="actions-col"><button class="update-btn" onclick="editPayment('${document.getElementById('investorSelect').value}', ${index})">✏️ Edit</button></td>`;
+                historyTable.appendChild(row);
+            });
+            
+            // Payment details table
+            const detailsTable = document.getElementById('paymentDetails');
+            detailsTable.innerHTML = '';
+            data.paymentDetails.forEach(detail => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${detail.description}</td><td>AED ${detail.amount.toLocaleString()}</td><td><span class="status ${detail.status}">${detail.status.charAt(0).toUpperCase() + detail.status.slice(1)}</span></td>`;
+                detailsTable.appendChild(row);
+            });
+        }
+
+        function displayUnitBreakdown(data) {
+            document.getElementById('investorShare').textContent = `${data.name} - Investment Share: ${data.investmentShare}`;
+            
+            const unitTable = document.getElementById('unitBreakdown');
+            unitTable.innerHTML = '';
+            
+            let totalInvestment = 0;
+            data.unitBreakdown.forEach(unit => {
+                totalInvestment += unit.investment;
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${unit.unitType}</td><td>AED ${unit.totalValue.toLocaleString()}</td><td>${unit.percentage}%</td><td>AED ${unit.investment.toLocaleString()}</td>`;
+                unitTable.appendChild(row);
+            });
+            
+            // Add total row
+            const totalRow = document.createElement('tr');
+            totalRow.style.fontWeight = 'bold';
+            totalRow.style.background = '#f8fafc';
+            totalRow.innerHTML = `<td>Total Investment</td><td>-</td><td>-</td><td>AED ${totalInvestment.toLocaleString()}</td>`;
+            unitTable.appendChild(totalRow);
+        }
+
+        function displayProofOfPayments(data) {
+            const proofContainer = document.getElementById('proofOfPayments');
+            proofContainer.innerHTML = '';
+            
+            if (data.proofOfPayments && data.proofOfPayments.length > 0) {
+                data.proofOfPayments.forEach((proof, index) => {
+                    const proofItem = document.createElement('div');
+                    proofItem.className = 'proof-item';
+                    
+                    const downloadButton = proof.uploaded 
+                        ? `<span class="download-btn" style="background: #6c757d; cursor: not-allowed;">📁 Uploaded File</span>`
+                        : `<a href="${proof.link}" target="_blank" class="download-btn">📥 Download</a>`;
+                    
+                    const deleteButton = isAdminMode || proof.uploaded 
+                        ? `<button class="delete-btn" onclick="deleteProofDocument('${document.getElementById('investorSelect').value}', ${index})">🗑️ Delete</button>`
+                        : '';
+
+                    const uploadedBadge = proof.uploaded 
+                        ? `<span style="background: #28a745; color: white; padding: 2px 6px; border-radius: 3px; font-size: 0.75rem; margin-left: 10px;">NEW</span>`
+                        : '';
+
+                    proofItem.innerHTML = `
+                        <div class="proof-info">
+                            <h4>${proof.date} - ${proof.amount}${uploadedBadge}</h4>
+                            <p>${proof.type}${proof.fileName ? ` | File: ${proof.fileName} (${proof.fileSize})` : ''}</p>
+                        </div>
+                        <div>
+                            ${downloadButton}
+                            ${deleteButton}
+                        </div>
+                    `;
+                    proofContainer.appendChild(proofItem);
+                });
+            } else {
+                proofContainer.innerHTML = '<p>No proof of payment documents available.</p>';
+            }
+        }
+
+        function displayInvestorData(investorKey) {
+            const data = investorData[investorKey];
+            displayStatement(data);
+            displayUnitBreakdown(data);
+            displayProofOfPayments(data);
+        }
+
+        function uploadProofDocument() {
+            const selectedInvestor = document.getElementById('investorSelect').value;
+            if (!selectedInvestor) {
+                alert("Please select an investor first.");
+                return;
+            }
+
+            const date = document.getElementById('uploadDate').value;
+            const amount = document.getElementById('uploadAmount').value;
+            const type = document.getElementById('uploadType').value;
+            const fileInput = document.getElementById('uploadFile');
+            const file = fileInput.files[0];
+
+            if (!date || !amount || !type || !file) {
+                alert("Please fill in all fields and select a file.");
+                return;
+            }
+
+            // Format date
+            const formattedDate = new Date(date).toLocaleDateString('en-GB');
+            
+            // Create a simulated URL for the uploaded file
+            const simulatedLink = `uploaded://${file.name}_${Date.now()}`;
+            
+            // Initialize uploaded documents for investor if not exists
+            if (!uploadedDocuments[selectedInvestor]) {
+                uploadedDocuments[selectedInvestor] = [];
+            }
+
+            // Add the new document
+            const newDocument = {
+                date: formattedDate,
+                amount: amount,
+                type: type,
+                link: simulatedLink,
+                fileName: file.name,
+                fileSize: (file.size / 1024).toFixed(2) + ' KB',
+                uploaded: true
+            };
+
+            uploadedDocuments[selectedInvestor].push(newDocument);
+            investorData[selectedInvestor].proofOfPayments.push(newDocument);
+
+            // Show upload preview
+            showUploadPreview(newDocument);
+
+            // Refresh the proof of payments display
+            displayProofOfPayments(investorData[selectedInvestor]);
+
+            // Clear form
+            document.getElementById('uploadDate').value = '';
+            document.getElementById('uploadAmount').value = '';
+            document.getElementById('uploadType').value = '';
+            document.getElementById('uploadFile').value = '';
+
+            // Save data
+            saveData();
+
+            alert("Document uploaded successfully!");
+        }
+
+        function showUploadPreview(document) {
+            const preview = document.getElementById('uploadPreview');
+            preview.style.display = 'block';
+            preview.innerHTML = `
+                <div class="upload-preview">
+                    ✅ Successfully uploaded: <strong>${document.fileName}</strong> (${document.fileSize})
+                    <br>📅 ${document.date} | 💰 ${document.amount} | 📝 ${document.type}
+                </div>
+            `;
+
+            // Hide preview after 3 seconds
+            setTimeout(() => {
+                preview.style.display = 'none';
+            }, 3000);
+        }
+
+        function deleteProofDocument(investorKey, index) {
+            if (confirm("Are you sure you want to delete this document?")) {
+                investorData[investorKey].proofOfPayments.splice(index, 1);
+                
+                // Also remove from uploaded documents if it exists
+                if (uploadedDocuments[investorKey]) {
+                    uploadedDocuments[investorKey] = uploadedDocuments[investorKey].filter(doc => 
+                        doc.link !== investorData[investorKey].proofOfPayments[index]?.link
+                    );
+                }
+
+                displayProofOfPayments(investorData[investorKey]);
+                saveData();
+                alert("Document deleted successfully!");
+            }
+        }
+        
+        function generateStatement() { 
+            const selectedInvestor = document.getElementById('investorSelect').value; 
+            if (!selectedInvestor) { alert("Please select an investor first."); return; } 
+            const data = investorData[selectedInvestor]; 
+            const statementHTML = document.getElementById('statement').innerHTML; 
+            const printCSS = `<style>body { font-family: Segoe UI, sans-serif; color: #000201; } .container { max-width: 800px; margin: auto; } .statement-header, .summary-card, .section { padding: 15px; border-radius: 8px; margin-bottom: 20px; } .statement-header { border-left: 5px solid #CBA735; background: #fafafa; } .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; } .summary-card { background: #f9f9f9; border: 1px solid #eee; text-align: center; } .summary-card h3 { font-size: 0.9em; text-transform: uppercase; color: #555; } .summary-card .value { font-size: 1.5em; font-weight: bold; } table { width: 100%; border-collapse: collapse; font-size: 0.9em; } th, td { padding: 10px; border: 1px solid #ccc; text-align: left; } th { background: #000201; color: #ffffff; } .status { padding: 4px 8px; border-radius: 12px; } .status.completed { background: #e6f3e6; color: #174A1C; } .status.pending { background: #eeeeee; color: #000201; } .actions-col, .action-buttons-container { display: none; }</style>`; 
+            const fullHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Investment Statement - ${data.name}</title>${printCSS}</head><body><div class="container">${statementHTML}</div></body></html>`; 
+            const statementWindow = window.open('', '_blank'); 
+            statementWindow.document.open(); 
+            statementWindow.document.write(fullHTML); 
+            statementWindow.document.close(); 
+            setTimeout(() => { statementWindow.print(); statementWindow.close(); }, 500); 
+        }
+
+        function downloadUnitBreakdown() {
+            const selectedInvestor = document.getElementById('investorSelect').value; 
+            if (!selectedInvestor) { alert("Please select an investor first."); return; }
+            const data = investorData[selectedInvestor]; 
+            const unitHTML = document.getElementById('units').innerHTML; 
+            const printCSS = `<style>body { font-family: Segoe UI, sans-serif; color: #000201; } .container { max-width: 800px; margin: auto; } .unit-breakdown { padding: 20px; } .unit-breakdown h3 { text-align: center; margin-bottom: 20px; } .investor-share { background: #CBA735; color: #000201; padding: 15px; text-align: center; margin-bottom: 20px; border-radius: 8px; } table { width: 100%; border-collapse: collapse; } th, td { padding: 10px; border: 1px solid #ccc; text-align: left; } th { background: #000201; color: #ffffff; } .action-buttons-container { display: none; }</style>`; 
+            const fullHTML = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Unit Breakdown - ${data.name}</title>${printCSS}</head><body><div class="container">${unitHTML}</div></body></html>`; 
+            const unitWindow = window.open('', '_blank'); 
+            unitWindow.document.open(); 
+            unitWindow.document.write(fullHTML); 
+            unitWindow.document.close(); 
+            setTimeout(() => { unitWindow.print(); unitWindow.close(); }, 500);
+        }
+        
+        function requestDetails() { 
+            const selectedInvestorKey = document.getElementById('investorSelect').value; 
+            if (!selectedInvestorKey) { alert("Please select an investor to make a request."); return; } 
+            const investorName = investorData[selectedInvestorKey].name; 
+            const subject = `Request for Payment Details for ${investorName}`; 
+            const body = `Hello,\n\nI would like to request more payment details for the investment account of ${investorName}.\n\nPlease provide a detailed breakdown of all transactions.\n\nThank you.\n\nBest regards,\n${investorName}`; 
+            const mailtoLink = `mailto:j.reyes@investmenter.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; 
+            window.location.href = mailtoLink; 
+        }
+
+        function requestProofHelp() {
+            const selectedInvestorKey = document.getElementById('investorSelect').value; 
+            if (!selectedInvestorKey) { alert("Please select an investor to make a request."); return; } 
+            const investorName = investorData[selectedInvestorKey].name; 
+            const subject = `Request for Missing Proof of Payment Documents - ${investorName}`; 
+            const body = `Hello,\n\nI would like to request missing proof of payment documents for the investment account of ${investorName}.\n\nPlease provide any missing payment receipts or transaction confirmations.\n\nThank you.\n\nBest regards,\n${investorName}`; 
+            const mailtoLink = `mailto:j.reyes@investmenter.de?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`; 
+            window.location.href = mailtoLink; 
+        }
+        
+        function toggleAdminPanel() { 
+            isAdminMode = !isAdminMode; 
+            const panel = document.getElementById('adminPanel'); 
+            const badge = document.querySelector('.admin-badge'); 
+            const toggleBtn = document.querySelector('.admin-toggle-btn'); 
+            document.body.classList.toggle('admin-mode-active', isAdminMode); 
+            panel.style.display = isAdminMode ? 'block' : 'none'; 
+            badge.style.display = isAdminMode ? 'inline-block' : 'none'; 
+            toggleBtn.innerHTML = isAdminMode ? '❌ Exit Admin' : '🔧 Admin Panel'; 
+            
+            // Refresh proof of payments display to show/hide delete buttons
+            const selectedInvestor = document.getElementById('investorSelect').value;
+            if (selectedInvestor && investorData[selectedInvestor]) {
+                displayProofOfPayments(investorData[selectedInvestor]);
+            }
+        }
+        
+        function displayAdminPayments(data) { 
+            const adminTable = document.getElementById('adminPaymentHistory'); 
+            adminTable.innerHTML = ''; 
+            data.paymentHistory.forEach((payment, index) => { 
+                const row = document.createElement('tr'); 
+                row.innerHTML = `<td>${payment.date}</td><td>${payment.type}</td><td>AED ${payment.installmentAmount.toLocaleString()}</td><td><input type="number" class="edit-input" value="${payment.receivedAmount}" id="received_${index}" onchange="updateReceivedAmount('${document.getElementById('adminInvestorSelect').value}', ${index}, this.value)"></td><td><span class="status ${payment.status}">${payment.status.charAt(0).toUpperCase() + payment.status.slice(1)}</span></td><td><button class="update-btn" onclick="markAsCompleted('${document.getElementById('adminInvestorSelect').value}', ${index})">✅ Complete</button><button class="update-btn" onclick="markAsPending('${document.getElementById('adminInvestorSelect').value}', ${index})">⏳ Pending</button></td>`; 
+                adminTable.appendChild(row); 
+            }); 
+        }
+        
+        function updateReceivedAmount(investorKey, paymentIndex, newAmount) {
+            const amount = parseFloat(newAmount) || 0;
+            const payment = investorData[investorKey].paymentHistory[paymentIndex];
+            payment.receivedAmount = amount;
+            payment.pendingAmount = Math.max(0, payment.installmentAmount - amount);
+            if (amount > 0 && amount >= payment.installmentAmount) {
+                payment.status = 'completed';
+            } else if (amount > 0) {
+                payment.status = 'partial';
+            } else {
+                payment.status = 'pending';
+            }
+            updatePaymentDetails(investorKey);
+            if (document.getElementById('investorSelect').value === investorKey) {
+                displayInvestorData(investorKey);
+            }
+            displayAdminPayments(investorData[investorKey]);
+            saveData(); 
+        }
+        
+        function markAsCompleted(investorKey, paymentIndex) {
+            const payment = investorData[investorKey].paymentHistory[paymentIndex];
+            payment.receivedAmount = payment.installmentAmount;
+            payment.pendingAmount = 0;
+            payment.status = 'completed';
+            updatePaymentDetails(investorKey);
+            if (document.getElementById('investorSelect').value === investorKey) {
+                displayInvestorData(investorKey);
+            }
+            displayAdminPayments(investorData[investorKey]);
+            saveData();
+        }
+        
+        function markAsPending(investorKey, paymentIndex) {
+            const payment = investorData[investorKey].paymentHistory[paymentIndex];
+            payment.receivedAmount = 0;
+            payment.pendingAmount = payment.installmentAmount;
+            payment.status = 'pending';
+            updatePaymentDetails(investorKey);
+            if (document.getElementById('investorSelect').value === investorKey) {
+                displayInvestorData(investorKey);
+            }
+            displayAdminPayments(investorData[investorKey]);
+            saveData();
+        }
+        
+        function updatePaymentDetails(investorKey) { 
+            const data = investorData[investorKey]; 
+            let totalPending = 0; 
+            let completedCount = 0; 
+            data.paymentHistory.forEach(p => p.status === 'completed' ? completedCount++ : totalPending += p.pendingAmount); 
+            const lastCompletedPayment = data.paymentHistory.slice().reverse().find(p => p.status === 'completed' && p.type !== 'Initial Investment'); 
+            const receivedValue = lastCompletedPayment ? lastCompletedPayment.receivedAmount : 0; 
+            data.paymentDetails = [{description: "Received Value", amount: receivedValue, status: "completed"}, {description: "Pending Payment", amount: totalPending, status: "pending"}]; 
+            data.completedPayments = completedCount; 
+            data.pendingPayments = data.paymentHistory.length - completedCount; 
+        }
+        
+        function editPayment(investorKey, paymentIndex) { 
+            const newAmount = prompt("Enter received amount:", investorData[investorKey].paymentHistory[paymentIndex].receivedAmount); 
+            if (newAmount !== null) { 
+                updateReceivedAmount(investorKey, paymentIndex, newAmount); 
+            } 
+        }
+        
+        // Event listeners and initial setup
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+            document.getElementById('statementDate').textContent = `Statement generated on ${today.toLocaleDateString('en-GB')}`;
+
+            document.getElementById('investorSelect').addEventListener('change', function() { 
+                const selectedInvestor = this.value; 
+                if (selectedInvestor && investorData[selectedInvestor]) { 
+                    displayInvestorData(selectedInvestor); 
+                    document.getElementById('tabContainer').style.display = 'block'; 
+                } else { 
+                    document.getElementById('tabContainer').style.display = 'none'; 
+                } 
+            });
+
+            document.getElementById('adminInvestorSelect').addEventListener('change', function() { 
+                const selectedInvestor = this.value; 
+                if (selectedInvestor && investorData[selectedInvestor]) { 
+                    displayAdminPayments(investorData[selectedInvestor]); 
+                    document.getElementById('adminPaymentTable').style.display = 'table'; 
+                } else { 
+                    document.getElementById('adminPaymentTable').style.display = 'none'; 
+                } 
+            });
+            
+            const style = document.createElement('style'); 
+            style.textContent = `.status.partial { background: #fff8e1; color: #6d4c41; } @media print { body { background: white; } .header, .investor-selector, .admin-panel, .action-buttons-container, .tab-navigation, .upload-section, .delete-btn { display: none; } .container { box-shadow: none; border-radius: 0; } .actions-col { display: none !important; } }`; 
+            document.head.appendChild(style);
+        });
+
+    </script>
+</body>
+</html>
